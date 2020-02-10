@@ -11,7 +11,7 @@
             for(let item of json) {
                 console.log(item);
                 let p = document.createElement('p');
-                p.textContent = item["name"];
+                p.textContent = item["department"];
                 document.body.appendChild(p);
             }
         }).catch(err => alert(err))
