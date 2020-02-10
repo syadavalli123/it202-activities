@@ -7,7 +7,7 @@
 
 <body>
     <div class="card" style="width: 18rem;">
-        <div class="card-body">
+        <div class="template">
             <h5 class="card-title">Card title</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -21,10 +21,18 @@
             return response.json()
         }).then(json => {
             for(let item of json) {
+                
                 console.log(item);
+                /*
                 let p = document.createElement('p');
-                p.textContent = item["department"];
+                p.textContent = item["name"] + "; " + item["department"];
                 document.body.appendChild(p);
+                */
+                let clone = document.body.querySelector(".template");
+                let p = clone.cloneNode(false);
+                clone.classList.remove("template");
+                
+                document.body.append(clone);
             }
         }).
         catch(err => alert(err))
