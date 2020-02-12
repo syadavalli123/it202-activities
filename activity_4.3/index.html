@@ -6,8 +6,8 @@
 </head>
 
 <body>
-    <div class="card" style="width: 18rem;">
-        <div class="template">
+    <div class="card template" style="width: 18rem;">
+        <div>
             <h5 class="card-title">Card title</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -16,23 +16,21 @@
         </div>
     </div>
     <script>
-        let apiEndpoint = "https://data.cityofchicago.org/resource/xzkq-xp2w.json";
-        fetch(apiEndpoint + "?$LIMIT=5").then(response => {
+        fetch("https://data.cityofchicago.org/resource/xzkq-xp2w.json" + "?$LIMIT=100").then(response => {
             return response.json()
         }).then(json => {
+            console.log(json);
+            
             for(let item of json) {
-                
                 console.log(item);
-                /*
-                let p = document.createElement('p');
-                p.textContent = item["name"] + "; " + item["department"];
-                document.body.appendChild(p);
-                */
-                let clone = document.body.querySelector(".template");
-                let p = clone.cloneNode(false);
-                clone.classList.remove("template");
-                
-                document.body.append(clone);
+                let element = document.querySelector(".card, .template");
+                let newClone = element.cloneNode(true);
+                newClone.classList.remove("template");
+                newClone.querySelector(".card-title").textContent = item.name;
+                newClone.querySelector(".card-subtitle").textContent = item.department;
+                newClone.querySelector(".card-text").textContent = item.annual_salary;
+                document.body.appendChild(newClone);
+                document.body.appendChild(newClone);
             }
         }).
         catch(err => alert(err))
